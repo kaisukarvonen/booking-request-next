@@ -136,7 +136,7 @@ export default function BasicDetails({
       {showVillaParatiisiPrivateForm && (
         <div className="mb-4 flex flex-col items-center">
           <p className="text-sm text-gray-900 mt-1">
-            Haluatko vuokrata vain tilan? Varaa suoraan{' '}
+            Haluatko vuokrata vain tilan? Varaa suoraan {' '}
             <a
               href="https://nuuksiontaika.johku.com/fi_FI/vuokratilat/mokki-nuuksio"
               target="_blank"
