@@ -25,7 +25,6 @@ export default function CustomAccordion({
   values,
   handleOnChange,
   extraInfo,
-  small,
 }: Props) {
   const field = getField(title);
   const displayOptions = options ?? field?.options ?? [];
@@ -34,16 +33,15 @@ export default function CustomAccordion({
     <div className={`border-b border-gray-200${!isOpen ? ' mb-2' : ''}`}>
       <button
         type="button"
-        className="w-full text-left py-2 flex items-center gap-2 font-medium hover:text-brand transition-colors"
+        className="w-full text-left py-2 flex items-center gap-2 font-medium text-md hover:text-brand transition-colors"
         onClick={() => onToggle(index)}
       >
         <span
-          className={`inline-block transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}
-          style={{ fontSize: small ? '12px' : '14px' }}
+          className={`inline-block transition-transform duration-200 ${isOpen ? 'rotate-90 mb-1' : ''}`}
         >
           ▶
         </span>
-        <span style={{ fontSize: small ? '12.3px' : '14px' }}>{field?.fi}</span>
+        <span>{field?.fi}</span>
       </button>
 
       {isOpen && (

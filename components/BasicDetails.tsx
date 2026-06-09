@@ -174,7 +174,7 @@ export default function BasicDetails({
             <div className="mt-3">
               <div className="flex flex-wrap gap-4 items-end mb-2">
                 <div className="relative flex-[2]" ref={datePickerRef}>
-                  <label className="block text-sm font-medium mb-0.5">
+                  <label className="block text-sm mb-0.5">
                     {t('dates')} <span className="text-red-500">*</span>
                   </label>
                   <div className="flex items-center">
@@ -205,7 +205,7 @@ export default function BasicDetails({
                 </div>
 
                 <div className="flex-1">
-                  <label className="block text-sm font-medium mb-0.5">
+                  <label className="block text-sm mb-0.5">
                     {t('arrivalTime')}
                   </label>
                   <select
@@ -229,7 +229,7 @@ export default function BasicDetails({
                 </div>
 
                 <div className="flex-1">
-                  <label className="block text-sm font-medium mb-0.5">
+                  <label className="block text-sm mb-0.5">
                     {t('departTime')}
                   </label>
                   <select
@@ -260,7 +260,7 @@ export default function BasicDetails({
 
           <div className="flex flex-wrap gap-4 mt-2">
             <div>
-              <label className="block text-sm font-medium mb-0.5">
+              <label className="block text-sm mb-0.5">
                 {t('personAmount')} <span className="text-red-500">*</span>
               </label>
               <input
@@ -278,7 +278,7 @@ export default function BasicDetails({
               />
             </div>
             <div className="flex-1 min-w-40">
-              <label className="block text-sm font-medium mb-0.5">
+              <label className="block text-sm mb-0.5">
                 {t('budget')}
               </label>
               <input
@@ -305,7 +305,7 @@ export default function BasicDetails({
 
       {(showPrivateForm || showVillaParatiisiPrivateForm || isCompany) && (
         <>
-          <h3 className="text-base font-medium border-b border-gray-300 pb-1 mt-4 mb-2">
+          <h3 className="text-base border-b border-gray-300 pb-1 mt-4 mb-2">
             {t('moreInformationTitle')}
           </h3>
           <textarea
@@ -327,7 +327,7 @@ export default function BasicDetails({
 
           <div className="flex flex-wrap gap-4">
             <div className="flex-1 min-w-40">
-              <label className="block text-sm font-medium mb-0.5">
+              <label className="block text-sm mb-0.5">
                 {t('name')} <span className="text-red-500">*</span>
               </label>
               <input
@@ -341,7 +341,7 @@ export default function BasicDetails({
               />
             </div>
             <div className="flex-1 min-w-40">
-              <label className="block text-sm font-medium mb-0.5">
+              <label className="block text-sm mb-0.5">
                 {t('email')} <span className="text-red-500">*</span>
               </label>
               <input
@@ -358,7 +358,7 @@ export default function BasicDetails({
 
           <div className="flex flex-wrap gap-4 mt-2">
             <div className="flex-1 min-w-40">
-              <label className="block text-sm font-medium mb-0.5">
+              <label className="block text-sm mb-0.5">
                 {t('phone')}
               </label>
               <input
@@ -372,7 +372,7 @@ export default function BasicDetails({
               />
             </div>
             <div className="flex-1 min-w-40">
-              <label className="block text-sm font-medium mb-0.5">
+              <label className="block text-sm mb-0.5">
                 {t('address')}
               </label>
               <input
@@ -388,7 +388,7 @@ export default function BasicDetails({
           </div>
 
           <div className="mt-2 max-w-xs">
-            <label className="block text-sm font-medium mb-0.5">
+            <label className="block text-sm mb-0.5">
               {t('companyName')}
             </label>
             <input

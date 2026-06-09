@@ -83,7 +83,7 @@ export default function Extras({ values, handleOnChange }: Props) {
               {activitiesField?.options.map((activitySet, i) => (
                 <div key={i}>
                   {activitySet.title && (
-                    <p className="text-sm font-medium mt-1">
+                    <p className="text-sm mt-1">
                       {activitySet.title}
                     </p>
                   )}

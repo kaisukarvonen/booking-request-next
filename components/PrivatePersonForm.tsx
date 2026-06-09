@@ -22,7 +22,7 @@ export default function PrivatePersonForm({
 
   return (
     <div className="mt-2">
-      <h4 className="text-base font-medium mb-1">{t('visitTypeTitle')}</h4>
+      <h4 className="text-base mb-1">{t('visitTypeTitle')}</h4>
       <div className="flex flex-col gap-1">
         {visitTypes.map(({ key, label }) => (
           <label
@@ -43,7 +43,7 @@ export default function PrivatePersonForm({
       </div>
 
       <div className="mt-2 max-w-xs">
-        <label className="block text-sm font-medium mb-0.5">
+        <label className="block text-sm mb-0.5">
           {t('visitTypeString')}
         </label>
         <input

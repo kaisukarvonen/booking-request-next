@@ -73,7 +73,7 @@ export default function LocationSelection({ values, handleOnChange, visitType }:
                       />
                       <label
                         htmlFor={`${locationOption.title}-${optVal}`}
-                        className="text-sm cursor-pointer"
+                        className="text-base cursor-pointer"
                       >
                         {optVal}
                       </label>
@@ -97,7 +97,7 @@ export default function LocationSelection({ values, handleOnChange, visitType }:
               />
               <label
                 htmlFor={locationOption.title}
-                className="text-base font-medium cursor-pointer"
+                className="text-base cursor-pointer"
               >
                 {locationOption.title}
               </label>
