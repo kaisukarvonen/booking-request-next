@@ -1,11 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CalendarPicker from './CalendarPicker';
 import CompanyForm from './CompanyForm';
 import PrivatePersonForm from './PrivatePersonForm';
 import { t } from '@/lib/fieldUtils';
-import type { CalendarData, DateRange, FormState, HandleOnChange } from '@/lib/types';
+import type {
+  CalendarData,
+  DateRange,
+  FormState,
+  HandleOnChange,
+} from '@/lib/types';
 
 // DateRange re-export for convenience
 export type { DateRange };
@@ -21,6 +26,8 @@ interface Props {
   dateToStr: (from?: Date, to?: Date) => string;
   setShowPrivateForm: (v: boolean) => void;
   showPrivateForm: boolean;
+  showVillaParatiisiPrivateForm: boolean;
+  setShowVillaParatiisiPrivateForm: (v: boolean) => void;
   calendarLoading: boolean;
 }
 
@@ -40,15 +47,34 @@ export default function BasicDetails({
   dateToStr,
   setShowPrivateForm,
   showPrivateForm,
+  showVillaParatiisiPrivateForm,
+  setShowVillaParatiisiPrivateForm,
   calendarLoading,
 }: Props) {
   const [popupOpen, setPopupOpen] = useState(false);
+  const datePickerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!popupOpen) return;
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (
+        datePickerRef.current &&
+        !datePickerRef.current.contains(e.target as Node)
+      ) {
+        setPopupOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, [popupOpen]);
 
   const isCompany = formData.type === 'company';
   const isPrivate = formData.type === 'private';
 
   const calendarType =
-    showPrivateForm || formData.locationObj?.useWainolaCalendar ? 'wainola' : 'villa';
+    showPrivateForm || formData.locationObj?.useWainolaCalendar
+      ? 'wainola'
+      : 'villa';
 
   const calData = {
     disabled: disabledDays[calendarType]?.disabledDays ?? [],
@@ -81,41 +107,74 @@ export default function BasicDetails({
   return (
     <>
       {isPrivate && (
-        <div className="flex flex-wrap gap-2 my-4">
-          <a
-            href="https://nuuksiontaika.johku.com/fi_FI/vuokratilat/mokki-nuuksio"
-            target="_blank"
-            rel="noreferrer"
+        <div className="flex flex-wrap gap-2 my-4 justify-center">
+          <button
+            type="button"
+            className={`btn btn-sm ${
+              showVillaParatiisiPrivateForm ? 'btn-active' : ''
+            }`}
+            onClick={() => {
+              setShowVillaParatiisiPrivateForm(true);
+              setShowPrivateForm(false);
+            }}
           >
-            <button type="button" className="btn btn-sm">
-              {t('villaParatiisiSelectionTitle')}
-            </button>
-          </a>
+            {t('villaParatiisiSelectionTitle')}
+          </button>
           <button
             type="button"
             className={`btn btn-sm ${showPrivateForm ? 'btn-active' : ''}`}
-            onClick={() => setShowPrivateForm(true)}
+            onClick={() => {
+              setShowPrivateForm(true);
+              setShowVillaParatiisiPrivateForm(false);
+            }}
           >
             {t('wainolaSelectionTitle')}
           </button>
         </div>
       )}
 
+      {showVillaParatiisiPrivateForm && (
+        <div className="mb-4 flex flex-col items-center">
+          <p className="text-sm text-gray-900 mt-1">
+            Haluatko vuokrata vain tilan? Varaa suoraan{' '}
+            <a
+              href="https://nuuksiontaika.johku.com/fi_FI/vuokratilat/mokki-nuuksio"
+              target="_blank"
+              rel="noreferrer"
+              className="text-brand underline"
+            >
+              verkkokaupasta
+            </a>
+            .
+          </p>
+        </div>
+      )}
+
       {showPrivateForm && (
-        <h3 className="text-[15.7px] font-medium border-b border-gray-300 pb-1 mt-4 mb-2">
+        <h3 className="text-base font-medium border-b border-gray-300 pb-1 mt-4 mb-2">
           {t('wainolaTitle')}
         </h3>
       )}
 
-      {isCompany && <CompanyForm handleOnChange={handleOnChange} values={formData} />}
+      {showVillaParatiisiPrivateForm && (
+        <h3 className="text-base font-medium border-b border-gray-300 pb-1 mt-4 mb-2">
+          {t('villaParatiisiSelectionTitle')}
+        </h3>
+      )}
 
-      {(showPrivateForm || isCompany) && (
+      {isCompany && (
+        <CompanyForm handleOnChange={handleOnChange} values={formData} />
+      )}
+
+      {(showPrivateForm || showVillaParatiisiPrivateForm || isCompany) && (
         <>
-          {(formData.locationObj?.title || showPrivateForm) && (
+          {(formData.locationObj?.title ||
+            showPrivateForm ||
+            showVillaParatiisiPrivateForm) && (
             <div className="mt-3">
               <div className="flex flex-wrap gap-4 items-end mb-2">
-                <div className="relative flex-[2]">
-                  <label className="block text-[13px] font-medium mb-0.5">
+                <div className="relative flex-[2]" ref={datePickerRef}>
+                  <label className="block text-sm font-medium mb-0.5">
                     {t('dates')} <span className="text-red-500">*</span>
                   </label>
                   <div className="flex items-center">
@@ -146,14 +205,17 @@ export default function BasicDetails({
                 </div>
 
                 <div className="flex-1">
-                  <label className="block text-[13px] font-medium mb-0.5">
+                  <label className="block text-sm font-medium mb-0.5">
                     {t('arrivalTime')}
                   </label>
                   <select
                     id="arrivalTime"
                     value={formData.arrivalTime}
                     onChange={(e) =>
-                      handleOnChange(e, { id: 'arrivalTime', value: e.target.value })
+                      handleOnChange(e, {
+                        id: 'arrivalTime',
+                        value: e.target.value,
+                      })
                     }
                     className="input-field w-full"
                   >
@@ -167,14 +229,17 @@ export default function BasicDetails({
                 </div>
 
                 <div className="flex-1">
-                  <label className="block text-[13px] font-medium mb-0.5">
+                  <label className="block text-sm font-medium mb-0.5">
                     {t('departTime')}
                   </label>
                   <select
                     id="departTime"
                     value={formData.departTime}
                     onChange={(e) =>
-                      handleOnChange(e, { id: 'departTime', value: e.target.value })
+                      handleOnChange(e, {
+                        id: 'departTime',
+                        value: e.target.value,
+                      })
                     }
                     className="input-field w-full"
                   >
@@ -188,14 +253,14 @@ export default function BasicDetails({
                 </div>
               </div>
               {t('dateExplanation') && (
-                <p className="text-[13px] text-gray-600">{t('dateExplanation')}</p>
+                <p className="text-sm text-gray-600">{t('dateExplanation')}</p>
               )}
             </div>
           )}
 
           <div className="flex flex-wrap gap-4 mt-2">
             <div>
-              <label className="block text-[13px] font-medium mb-0.5">
+              <label className="block text-sm font-medium mb-0.5">
                 {t('personAmount')} <span className="text-red-500">*</span>
               </label>
               <input
@@ -204,18 +269,25 @@ export default function BasicDetails({
                 min={1}
                 value={formData.personAmount}
                 onChange={(e) =>
-                  handleOnChange(e, { id: 'personAmount', value: e.target.value })
+                  handleOnChange(e, {
+                    id: 'personAmount',
+                    value: e.target.value,
+                  })
                 }
                 className="input-field w-24"
               />
             </div>
             <div className="flex-1 min-w-40">
-              <label className="block text-[13px] font-medium mb-0.5">{t('budget')}</label>
+              <label className="block text-sm font-medium mb-0.5">
+                {t('budget')}
+              </label>
               <input
                 type="text"
                 id="budget"
                 value={formData.budget}
-                onChange={(e) => handleOnChange(e, { id: 'budget', value: e.target.value })}
+                onChange={(e) =>
+                  handleOnChange(e, { id: 'budget', value: e.target.value })
+                }
                 className="input-field w-full"
               />
             </div>
@@ -223,7 +295,7 @@ export default function BasicDetails({
         </>
       )}
 
-      {showPrivateForm && (
+      {(showPrivateForm || showVillaParatiisiPrivateForm) && (
         <PrivatePersonForm
           values={formData}
           handleOnChange={handleOnChange}
@@ -231,9 +303,9 @@ export default function BasicDetails({
         />
       )}
 
-      {(showPrivateForm || isCompany) && (
+      {(showPrivateForm || showVillaParatiisiPrivateForm || isCompany) && (
         <>
-          <h3 className="text-[15.7px] font-medium border-b border-gray-300 pb-1 mt-4 mb-2">
+          <h3 className="text-base font-medium border-b border-gray-300 pb-1 mt-4 mb-2">
             {t('moreInformationTitle')}
           </h3>
           <textarea
@@ -241,37 +313,44 @@ export default function BasicDetails({
             id="moreInformation"
             value={formData.moreInformation}
             onChange={(e) =>
-              handleOnChange(e, { id: 'moreInformation', value: e.target.value })
+              handleOnChange(e, {
+                id: 'moreInformation',
+                value: e.target.value,
+              })
             }
             className="input-field w-full resize-y"
           />
 
-          <h3 className="text-[15.7px] font-medium border-b border-gray-300 pb-1 mt-4 mb-2">
+          <h3 className="text-base font-medium border-b border-gray-300 pb-1 mt-4 mb-2">
             {t('basicDetails')}
           </h3>
 
           <div className="flex flex-wrap gap-4">
             <div className="flex-1 min-w-40">
-              <label className="block text-[13px] font-medium mb-0.5">
+              <label className="block text-sm font-medium mb-0.5">
                 {t('name')} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 id="name"
                 value={formData.name}
-                onChange={(e) => handleOnChange(e, { id: 'name', value: e.target.value })}
+                onChange={(e) =>
+                  handleOnChange(e, { id: 'name', value: e.target.value })
+                }
                 className="input-field w-full"
               />
             </div>
             <div className="flex-1 min-w-40">
-              <label className="block text-[13px] font-medium mb-0.5">
+              <label className="block text-sm font-medium mb-0.5">
                 {t('email')} <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
                 id="email"
                 value={formData.email}
-                onChange={(e) => handleOnChange(e, { id: 'email', value: e.target.value })}
+                onChange={(e) =>
+                  handleOnChange(e, { id: 'email', value: e.target.value })
+                }
                 className="input-field w-full"
               />
             </div>
@@ -279,29 +358,39 @@ export default function BasicDetails({
 
           <div className="flex flex-wrap gap-4 mt-2">
             <div className="flex-1 min-w-40">
-              <label className="block text-[13px] font-medium mb-0.5">{t('phone')}</label>
+              <label className="block text-sm font-medium mb-0.5">
+                {t('phone')}
+              </label>
               <input
                 type="tel"
                 id="phone"
                 value={formData.phone}
-                onChange={(e) => handleOnChange(e, { id: 'phone', value: e.target.value })}
+                onChange={(e) =>
+                  handleOnChange(e, { id: 'phone', value: e.target.value })
+                }
                 className="input-field w-full"
               />
             </div>
             <div className="flex-1 min-w-40">
-              <label className="block text-[13px] font-medium mb-0.5">{t('address')}</label>
+              <label className="block text-sm font-medium mb-0.5">
+                {t('address')}
+              </label>
               <input
                 type="text"
                 id="address"
                 value={formData.address}
-                onChange={(e) => handleOnChange(e, { id: 'address', value: e.target.value })}
+                onChange={(e) =>
+                  handleOnChange(e, { id: 'address', value: e.target.value })
+                }
                 className="input-field w-full"
               />
             </div>
           </div>
 
           <div className="mt-2 max-w-xs">
-            <label className="block text-[13px] font-medium mb-0.5">{t('companyName')}</label>
+            <label className="block text-sm font-medium mb-0.5">
+              {t('companyName')}
+            </label>
             <input
               type="text"
               id="companyName"

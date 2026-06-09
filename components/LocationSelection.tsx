@@ -36,7 +36,7 @@ export default function LocationSelection({ values, handleOnChange, visitType }:
 
   return (
     <div>
-      <h3 className="text-[15.7px] font-medium border-b border-gray-300 pb-1 mt-3 mb-2">
+      <h3 className="text-base font-medium border-b border-gray-300 pb-1 mt-3 mb-2">
         {t('accommodationTitle')}
       </h3>
 
@@ -49,7 +49,7 @@ export default function LocationSelection({ values, handleOnChange, visitType }:
             <div key={locationOption.title} className="border-b border-gray-200">
               <button
                 type="button"
-                className="w-full text-left py-2 flex items-center gap-1 font-medium text-[14px] hover:text-brand"
+                className="w-full text-left py-2 flex items-center gap-1 font-medium text-base hover:text-brand"
                 onClick={() => toggleAccordion(index)}
               >
                 <span className={`transition-transform ${isOpen ? 'rotate-90' : ''}`}>▶</span>
@@ -73,7 +73,7 @@ export default function LocationSelection({ values, handleOnChange, visitType }:
                       />
                       <label
                         htmlFor={`${locationOption.title}-${optVal}`}
-                        className="text-[13px] cursor-pointer"
+                        className="text-sm cursor-pointer"
                       >
                         {optVal}
                       </label>
@@ -97,7 +97,7 @@ export default function LocationSelection({ values, handleOnChange, visitType }:
               />
               <label
                 htmlFor={locationOption.title}
-                className="text-[14px] font-medium cursor-pointer"
+                className="text-base font-medium cursor-pointer"
               >
                 {locationOption.title}
               </label>

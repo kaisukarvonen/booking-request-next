@@ -59,12 +59,12 @@ export default function CustomAccordion({
                 }
                 className="accent-brand"
               />
-              <label htmlFor={opt.key} className="text-[13px] cursor-pointer">
+              <label htmlFor={opt.key} className="text-sm cursor-pointer">
                 {opt.fi}
               </label>
             </div>
           ))}
-          {extraInfo && <p className="text-[13px] mt-1 text-gray-600">{extraInfo}</p>}
+          {extraInfo && <p className="text-sm mt-1 text-gray-600">{extraInfo}</p>}
         </div>
       )}
     </div>

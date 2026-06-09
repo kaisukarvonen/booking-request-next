@@ -6,7 +6,7 @@ import Extras from './Extras';
 import Notification from './Notification';
 import { getField, t } from '@/lib/fieldUtils';
 import { createEmailHTML, dateToStr } from '@/lib/createHTML';
-import type { CalendarData, CalendarState, DateRange, FormState, HandleOnChange } from '@/lib/types';
+import type { CalendarState, DateRange, FormState, HandleOnChange } from '@/lib/types';
 
 const initialForm: FormState = {
   from: undefined,
@@ -62,6 +62,7 @@ export default function Form({
   });
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const [showPrivateForm, setShowPrivateForm] = useState(false);
+  const [showVillaParatiisiPrivateForm, setShowVillaParatiisiPrivateForm] = useState(false);
   const [activePeriod, setActivePeriod] = useState<'winter' | 'summer' | undefined>();
   const [sendingEmail, setSendingEmail] = useState(false);
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -170,12 +171,12 @@ export default function Form({
   };
 
   const isCompany = formData.type === 'company';
-  const showPrivate = formData.type === 'private' && showPrivateForm;
+  const showPrivate = formData.type === 'private' && (showPrivateForm || showVillaParatiisiPrivateForm);
 
   return (
     <div className="min-h-screen flex flex-col justify-between">
       <div className="max-w-2xl mx-auto w-full px-4 py-10 flex-grow">
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div className="flex flex-wrap gap-2 mb-6 justify-center">
           {[
             { text: 'Yritysasiakas', type: 'company' as const },
             { text: 'Yksityisasiakas', type: 'private' as const },
@@ -203,7 +204,9 @@ export default function Form({
               availableUntil12={availableUntil12}
               dateToStr={dateToStr}
               setShowPrivateForm={setShowPrivateForm}
-              showPrivateForm={showPrivate}
+              showPrivateForm={formData.type === 'private' && showPrivateForm}
+              showVillaParatiisiPrivateForm={showVillaParatiisiPrivateForm}
+              setShowVillaParatiisiPrivateForm={setShowVillaParatiisiPrivateForm}
               calendarLoading={calendarLoading}
             />
 
@@ -222,7 +225,7 @@ export default function Form({
                   handleOnChange={handleOnChange}
                 />
 
-                <div className="mt-4 p-2 bg-gray-50 border border-gray-200 text-[13px]">
+                <div className="mt-4 p-2 bg-gray-50 border border-gray-200 text-sm">
                   {getField('paymentInfo')?.[formData.type as 'company' | 'private']?.fi}
                   <div className="mt-1">
                     Tutustu{' '}
@@ -251,7 +254,7 @@ export default function Form({
                     }
                     className="accent-brand"
                   />
-                  <label htmlFor="newsLetter" className="text-[13px] cursor-pointer">
+                  <label htmlFor="newsLetter" className="text-sm cursor-pointer">
                     Tilaan uutiskirjeen
                   </label>
                 </div>

@@ -11,7 +11,9 @@ interface Props {
 }
 
 export default function Extras({ values, handleOnChange }: Props) {
-  const [openAccordions, setOpenAccordions] = useState<number[]>([0, 1, 2, 3, 4]);
+  const [openAccordions, setOpenAccordions] = useState<number[]>([
+    0, 1, 2, 3, 4,
+  ]);
 
   const toggleAccordion = (index: number) => {
     setOpenAccordions((prev) =>
@@ -33,7 +35,7 @@ export default function Extras({ values, handleOnChange }: Props) {
 
   return (
     <div className="mt-4">
-      <h3 className="text-[15.7px] font-medium border-b border-gray-300 pb-1 mb-2">
+      <h3 className="text-base font-medium border-b border-gray-300 pb-1 mb-2">
         {t('servicesTitle')}
       </h3>
 
@@ -47,13 +49,23 @@ export default function Extras({ values, handleOnChange }: Props) {
         handleOnChange={handleOnChange}
       />
 
-      <div className={`border-b border-gray-200${!openAccordions.includes(1) ? ' mb-2' : ''}`}>
+      <div
+        className={`border-b border-gray-200${
+          !openAccordions.includes(1) ? ' mb-2' : ''
+        }`}
+      >
         <button
           type="button"
-          className="w-full text-left py-2 flex items-center gap-2 font-medium text-[14px] hover:text-brand transition-colors"
+          className="w-full text-left py-2 flex items-center gap-2 font-medium text-base hover:text-brand transition-colors"
           onClick={() => toggleAccordion(1)}
         >
-          <span className={`transition-transform duration-200 ${openAccordions.includes(1) ? 'rotate-90' : ''}`}>▶</span>
+          <span
+            className={`transition-transform duration-200 ${
+              openAccordions.includes(1) ? 'rotate-90' : ''
+            }`}
+          >
+            ▶
+          </span>
           {t('activities')}
         </button>
 
@@ -71,22 +83,31 @@ export default function Extras({ values, handleOnChange }: Props) {
               {activitiesField?.options.map((activitySet, i) => (
                 <div key={i}>
                   {activitySet.title && (
-                    <p className="text-[13px] font-medium mt-1">{activitySet.title}</p>
+                    <p className="text-sm font-medium mt-1">
+                      {activitySet.title}
+                    </p>
                   )}
-                  {(activitySet.options as string[] | undefined)?.map((activity, j) => (
-                    <div key={j} className="flex items-center gap-1.5 my-0.5">
-                      <input
-                        type="checkbox"
-                        id={`activity-${i}-${j}`}
-                        checked={values.activities.includes(activity)}
-                        onChange={(e) => onActivitiesChange(activity, e.target.checked)}
-                        className="accent-brand"
-                      />
-                      <label htmlFor={`activity-${i}-${j}`} className="text-[13px] cursor-pointer">
-                        {activity}
-                      </label>
-                    </div>
-                  ))}
+                  {(activitySet.options as string[] | undefined)?.map(
+                    (activity, j) => (
+                      <div key={j} className="flex items-center gap-1.5 my-0.5">
+                        <input
+                          type="checkbox"
+                          id={`activity-${i}-${j}`}
+                          checked={values.activities.includes(activity)}
+                          onChange={(e) =>
+                            onActivitiesChange(activity, e.target.checked)
+                          }
+                          className="accent-brand"
+                        />
+                        <label
+                          htmlFor={`activity-${i}-${j}`}
+                          className="text-sm cursor-pointer"
+                        >
+                          {activity}
+                        </label>
+                      </div>
+                    )
+                  )}
                 </div>
               ))}
             </div>
