@@ -1,0 +1,527 @@
+[
+  {
+    "key": "name",
+    "fi": "Yhteyshenkilö",
+    "options": []
+  },
+  {
+    "key": "email",
+    "fi": "Sähköposti",
+    "options": []
+  },
+  {
+    "key": "phone",
+    "fi": "Puhelin",
+    "options": []
+  },
+  {
+    "key": "dates",
+    "fi": "Ajankohta",
+    "options": []
+  },
+  {
+    "key": "departTime",
+    "fi": "Lähtöaika",
+    "options": []
+  },
+  {
+    "key": "arrivalTime",
+    "fi": "Tuloaika",
+    "options": []
+  },
+  {
+    "key": "personAmount",
+    "fi": "Henkilömäärä",
+    "options": []
+  },
+  {
+    "key": "phone",
+    "fi": "Puhelin",
+    "options": []
+  },
+  {
+    "key": "clientTypeTitle",
+    "fi": "Olen",
+    "options": []
+  },
+  {
+    "key": "company",
+    "fi": "Yritys",
+    "options": []
+  },
+  {
+    "key": "private",
+    "fi": "Yksityinen",
+    "options": []
+  },
+  {
+    "key": "companyName",
+    "fi": "Yrityksen nimi",
+    "options": []
+  },
+  {
+    "key": "visitTypeTitle",
+    "fi": "Millainen tilaisuus?",
+    "options": []
+  },
+  {
+    "key": "visitTypeString",
+    "fi": "Muu tilaisuus, mikä?",
+    "options": []
+  },
+  {
+    "key": "meetingTitle",
+    "fi": "Valitse paikka? (hinnat alv 0 %)",
+    "options": []
+  },
+  {
+    "key": "meetingOptions",
+    "options": [
+      {
+        "infoEn": "more information",
+        "infoFi": "",
+        "price": 580,
+        "duration": 8,
+        "en": "Day meeting",
+        "fi": "Päivätilaisuus",
+        "key": "dayMeeting"
+      },
+      {
+        "infoEn": "more information",
+        "infoFi": "",
+        "price": 780,
+        "duration": 10,
+        "en": "Day meeting and evening sauna",
+        "fi": "Päivätilaisuus saunan kanssa",
+        "key": "dayMeetingSauna"
+      },
+      {
+        "infoEn": "more information",
+        "infoFi": "",
+        "price": 980,
+        "duration": 24,
+        "en": "From lunch to lunch meeting with accommodation",
+        "fi": "Lounaasta lounaaseen ja majoitus",
+        "key": "lunchToLunchAccommodation"
+      },
+      {
+        "infoEn": "more information",
+        "infoFi": "",
+        "price": 1285,
+        "duration": 32,
+        "en": "Day meeting with accommodation",
+        "fi": "Kaksi päivää ja majoitus",
+        "key": "meetingAccommodation"
+      }
+    ]
+  },
+  {
+    "key": "meetingEquipment",
+    "fi": "Tilaan uutiskirjeen",
+    "options": [
+      {
+        "en": "Yes",
+        "fi": "Kyllä",
+        "key": "yes"
+      }
+    ]
+  },
+  {
+    "key": "locationTitle",
+    "fi": "Valitse paikka",
+    "options": []
+  },
+  {
+    "key": "villaParatiisi",
+    "fi": "Villa Paratiisissa",
+    "url": "x",
+    "max": 14,
+    "options": []
+  },
+  {
+    "key": "birthday",
+    "fi": "Synttärit",
+    "options": []
+  },
+  {
+    "key": "bachelor",
+    "fi": "Polttarit",
+    "options": []
+  },
+  {
+    "key": "extraServices",
+    "fi": "Lisäpalvelut",
+    "options": [
+      {
+        "fi": "Lakanat",
+        "key": "lakanat"
+      },
+      {
+        "fi": "Pyyhkeet",
+        "key": "pyyhkeet"
+      },
+      {
+        "fi": "Lämminvesipalju",
+        "key": "palju"
+      }
+    ]
+  },
+  {
+    "key": "supper",
+    "fi": "Iltapala",
+    "options": []
+  },
+  {
+    "key": "allergies",
+    "fi": "Mahdolliset ruoka-allergiat",
+    "options": []
+  },
+  {
+    "key": "activityTitle",
+    "fi": "Aktiviteetit",
+    "options": []
+  },
+  {
+    "key": "rentalEquipment",
+    "fi": "Vuokravälineet",
+    "options": [
+      {
+        "priceInfoFi": " / 2kpl",
+        "alvPrice": 50,
+        "fi": "SUP-laudat",
+        "en": "SUP-boards ",
+        "key": "supBoards"
+      },
+      {
+        "priceInfoFi": " / 2kpl",
+        "alvPrice": 70,
+        "fi": "Tiimikanootit",
+        "en": "Team canoes",
+        "key": "canoes"
+      },
+      {
+        "priceInfoFi": " / kpl, 2 kpl saatavilla",
+        "alvPrice": 45,
+        "fi": "Liukulumikengät",
+        "en": "Skin based ski",
+        "key": "skinbasedski"
+      },
+      {
+        "priceInfoFi": " / kpl, 6 kpl saatavilla",
+        "alvPrice": 30,
+        "fi": "Potkukelkat",
+        "en": "Kick sledge",
+        "key": "kickbikes"
+      },
+      {
+        "priceInfoFi": " / pari, 10 kpl saatavilla",
+        "alvPrice": 25,
+        "fi": "Lumikengät",
+        "en": "Snow shoes",
+        "key": "snowshoes"
+      }
+    ]
+  },
+  {
+    "key": "priceTitle",
+    "fi": "Alustava hinta",
+    "options": []
+  },
+  {
+    "key": "contactDetails",
+    "fi": "Yhteystiedot",
+    "options": []
+  },
+  {
+    "key": "foodOptions",
+    "fi": "Tarjoilut",
+    "options": [
+      {
+        "fi": "Aamiainen",
+        "en": "Breakfast",
+        "key": "breakfast"
+      },
+      {
+        "infoEn": "More info",
+        "infoFi": "",
+        "fi": "Lounas",
+        "en": "Lunch",
+        "key": "lunch"
+      },
+      {
+        "fi": "Nokipannukahvit",
+        "en": "Nokipannukahvit",
+        "key": "nokipannu"
+      },
+      {
+        "infoEn": "More info",
+        "infoFi": "",
+        "fi": "Välipala",
+        "en": "Snack",
+        "key": "snack"
+      },
+      {
+        "infoEn": "More info",
+        "infoFi": "",
+        "fi": "Illallinen",
+        "en": "Dinner",
+        "key": "dinner"
+      },
+      {
+        "fi": "Iltapala",
+        "en": "Supper",
+        "key": "iltapala"
+      }
+    ]
+  },
+  {
+    "key": "party",
+    "fi": "Häät",
+    "options": []
+  },
+  {
+    "key": "paymentInfo",
+    "company": {
+      "fi": "Tarjoilujen ja ohjelmien hinnat määräytyvät saatavuuden mukaan. Pidätämme oikeuden muutoksiin. Laskutamme tilavuokran varauksen yhteydessä, muut palvelut tilaisuuden jälkeen."
+    },
+    "private": {
+      "fi": "Tarjoilujen ja ohjelmien hinnat määräytyvät saatavuuden mukaan. Pidätämme oikeuden muutoksiin."
+    },
+    "options": []
+  },
+  {
+    "key": "otherPrograms",
+    "fi": "Muut ohjelmat",
+    "options": [
+      {
+        "fi": "Jurttasauna",
+        "en": "Jurttasauna",
+        "key": "jurttasauna"
+      },
+      {
+        "fi": "Elävää musiikkia",
+        "en": "Live music",
+        "key": "liveMusic"
+      }
+    ]
+  },
+  {
+    "key": "programs",
+    "fi": "Ohjelmat",
+    "options": []
+  },
+  {
+    "key": "extraPersons",
+    "fi": "Lisähenkilöt",
+    "en": "Extra persons",
+    "options": [
+      {
+        "winter": {
+          "1": 100,
+          "2": 40,
+          "choices": [2, 2, 2, 3]
+        },
+        "summer": {
+          "1": 100,
+          "2": 40,
+          "choices": [2, 2, 2, 3]
+        },
+        "fi": "Huone mökissä",
+        "key": "cottage"
+      },
+      {
+        "price": 90,
+        "en": "Laavu / 4 persons, includes outdoor mattress",
+        "fi": "Laavu / 4 hlöä, sisältää retkipatjat",
+        "key": "laavu"
+      },
+      {
+        "price": 90,
+        "en": "Tentsile -wooden tent / 2 persons, includes outdoor mattress",
+        "fi": "Tentsile-puuteltta / 2 hlöä, sisältää retkipatjat",
+        "key": "tentsile"
+      },
+      {
+        "price": 45,
+        "en": "Amok-hammock / 1 person, includes outdoor mattress",
+        "fi": "Amok-riippumatto / 1 hlö, sisältää retkipatjan",
+        "key": "amok"
+      }
+    ]
+  },
+  {
+    "key": "cleaning",
+    "fi": "Siivous",
+    "summer": 150,
+    "winter": {
+      "villa": 110,
+      "cottage": 10
+    },
+    "options": []
+  },
+  {
+    "key": "acommodationInfo",
+    "summer": {
+      "fi": "Touko-syyskuussa tilavuokra Villa Paratiisissa on ensimmäiseltä yöltä 880 € ja seuraavilta 580 € / max. 12 henkilöä. Hinta sisältää klo 16-12 välisen oleskelun. Jos siivoatte itse, on varaus klo 14 asti. HUOM! Juhannuksena minimivuokra-aika on 2vrk.",
+      "en": "In May-September accommodation price in Villa Paratiisi is for the first night 880€ and for all following 580 € / max. 12 persons. Price includes stay from 16 to 12 o'clock. Please notice: during Midsummer, minimum staying period is 2 nights."
+    },
+    "winter": {
+      "fi": "Loka-huhtikuussa tilavuokra Villa Paratiisissa on ensimmäiseltä yöltä 480 € ja seuraavilta 200 € / max. 5+1 henkilöä. Ks. lisähenkilöiden majoittaminen alhaalla. Hinta sisältää klo 16-12 välisen oleskelun. Jos siivoatte itse, on varaus klo 14 asti. HUOM! Jouluna ja Uutenavuotena tilavuokra on ensimmäiseltä yöltä 880 € ja seuraavilta 580 € / max. 12 henkilöä, minimivuokra-aika 2vrk.",
+      "en": "In October-April accommodation price in Villa Paratiisi is 480€ for the first night and for all following 200 € / max 5+1 persons. Please see prices and accommodation options for extra persons below.  Price includes stay from 16 to 12 o'clock next day. Please notice: during Christmas and New Years, price is 880 € for the first night and for all following 580 € / max. 12 persons, with minimum staying period of 2 nights."
+    },
+    "options": []
+  },
+  {
+    "key": "address",
+    "fi": "Osoite",
+    "options": []
+  },
+  {
+    "key": "recreationOptions",
+    "options": [
+      {
+        "infoFi": "",
+        "price": 580,
+        "duration": 8,
+        "fi": "Päivä Villa Paratiisissa",
+        "key": "oneDay"
+      },
+      {
+        "infoFi": "",
+        "price": 780,
+        "duration": 12,
+        "fi": "Villa Paratiisi sis. saunan",
+        "key": "oneDaySauna"
+      },
+      {
+        "infoFi": "",
+        "price": 980,
+        "duration": 24,
+        "fi": "Vuorokausi Villa Paratiisissa (max 12 hlöä)",
+        "key": "accommodationWithSauna"
+      },
+      {
+        "infoFi": "",
+        "price": 1285,
+        "duration": 32,
+        "fi": "2 päivää Villa Paratiisissa sis. saunan majoituksella (max 12 hlöä)",
+        "key": "longerAccommodationWithSauna"
+      }
+    ]
+  },
+  {
+    "key": "petFee",
+    "price": 30,
+    "alvPrice": 30,
+    "fi": "Lemmikkieläimet",
+    "options": []
+  },
+  {
+    "key": "activities",
+    "fi": "Aktiviteetit ja ohjelmat",
+    "options": [
+      {
+        "options": [
+          "LIIKUNTAA mm. jousiammunta, fatbike, melonta",
+          "LUONTOON mm. metsäretki, sieniretki, linturetki",
+          "HYVÄÄ OLOA mm. aistimatka, metsäjooga, äänirentoutus",
+          "YHTEISPELIÄ mm. pakopelit, Nuuksio Survival",
+          "MAKUJA mm. Wäinölän pidot, kokkausta tulilla",
+          "TAITOJA mm. kädentaidot, sirkustaidot, rumpurytmit",
+          "TYÖYHTEISÖ mm. Tunneälyn taikaa, Työelämän Survival",
+          "PERINTEITÄ mm. Kalevalan Taikaa, Karhumytologia",
+          "ESIINTYJIÄ mm. muusiikki, tulitaide",
+          "TALVEEN mm. lumikenkäily, potkukelkkailu, pilkkiminen"
+        ],
+        "title": ""
+      }
+    ]
+  },
+  {
+    "key": "budget",
+    "fi": "Budjettinne (yhteensä tai /hlö)",
+    "options": []
+  },
+  {
+    "key": "companyAccommodations",
+    "options": [
+      {
+        "useVillaCalendar": true,
+        "title": "Villa Paratiisi (majoitus 14 hlöä)"
+      },
+      {
+        "useWainolaCalendar": true,
+        "title": "Wäinölä (nuotiopaikka 100 hlöä ja hirsitupa istuen 40 hlöä)"
+      },
+      {
+        "useVillaCalendar": true,
+        "title": "Villa Paratiisi ja Wäinölä"
+      }
+    ]
+  },
+  {
+    "key": "privateAccommodations",
+    "options": [
+      {
+        "useCalendar": true,
+        "title": "Villa Paratiisi ja Wäinölä"
+      },
+      {
+        "title": "Wäinölä"
+      }
+    ]
+  },
+  {
+    "key": "buyAccommodationButton",
+    "fi": "Varaa Villa Paratiisi suoraan tästä verkkokaupan linkistä. Lähetä Wäinölästä alla oleva tarjouspyyntö.",
+    "options": []
+  },
+  {
+    "key": "accommodationTitle",
+    "fi": "Valitse paikka",
+    "options": []
+  },
+  {
+    "key": "basicDetails",
+    "fi": "Täytä yhteystiedot",
+    "options": []
+  },
+  {
+    "key": "wainolaTitle",
+    "fi": "Wäinölä (nuotiopaikka 100 hlöä ja hirsitupa istuen 40 hlöä, ei majoitusta)",
+    "options": []
+  },
+  {
+    "key": "servicesTitle",
+    "fi": "Lisäpalvelut",
+    "options": []
+  },
+  {
+    "key": "moreInformationTitle",
+    "fi": "Lisätietoa tarjouspyyntöön. Kerrottehan mikäli haluatte tilaisuudestanne esteettömän. ",
+    "options": []
+  },
+  {
+    "key": "villaParatiisiSelectionTitle",
+    "fi": "Villa Paratiisi",
+    "options": []
+  },
+  {
+    "key": "wainolaSelectionTitle",
+    "fi": "Wäinölä",
+    "options": []
+  },
+  {
+    "key": "loadingForm",
+    "fi": "Ladataan tarjouspyyntöä, odota hetki...",
+    "options": []
+  },
+  {
+    "options": []
+  },
+  {
+    "key": "dateExplanation",
+    "fi": "",
+    "options": []
+  }
+]

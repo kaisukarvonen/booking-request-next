@@ -1,26 +1,254 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-spartan), 'League Spartan', sans-serif;
+  --font-button: var(--font-josefin), 'Josefin Sans', sans-serif;
+
+  --color-brand: #315322;
+  --color-brand-subtle: #eef5eb;
+  --color-available: #a8db90;
+  --color-available-strong: #6aaa54;
+  --color-available-mid: #d7ffc4;
+  --color-available-legend: #c2e2b3;
+  --color-partial: #ffc107;
+  --color-partial-dark: #c49407;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Base styles */
+body {
+  font-size: 13px;
+  font-family: var(--font-spartan, 'League Spartan'), sans-serif;
+  line-height: 1.46;
+  background: #ffffff;
+  color: #000;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+button, select {
+  font-family: var(--font-josefin, 'Josefin Sans'), sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+p {
+  margin: 0.1em 0;
+}
+
+/* Reusable button styles */
+.btn {
+  border: 1px solid var(--color-brand);
+  background-color: #fff;
+  color: #000;
+  border-radius: 0;
+  transition: all 0.3s;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: var(--font-josefin, 'Josefin Sans'), sans-serif;
+  display: inline-block;
+}
+
+.btn:hover, .btn.btn-active {
+  background-color: var(--color-brand);
+  color: #fff;
+}
+
+.btn-lg {
+  font-size: 18px;
+  padding: 0.5rem 1.4rem;
+}
+
+.btn-sm {
+  font-size: 12px;
+  padding: 0.25rem 0.6rem;
+}
+
+.btn-primary {
+  background-color: var(--color-brand);
+  color: #fff;
+  border: 1px solid var(--color-brand);
+  border-radius: 0;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-family: var(--font-josefin, 'Josefin Sans'), sans-serif;
+  font-size: 14px;
+}
+
+.btn-primary:hover {
+  background-color: #000;
+  border-color: #000;
+  transform: scale(1.1);
+}
+
+/* Input styles */
+.input-field {
+  border: 1px solid #ccc;
+  border-radius: 0;
+  padding: 0.25rem 0.4rem;
+  font-size: 13px;
+  font-family: var(--font-spartan, 'League Spartan'), sans-serif;
+  height: 30px;
+  line-height: 1.46;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-brand);
+}
+
+textarea.input-field {
+  height: auto;
+  padding: 4px;
+}
+
+/* react-day-picker v10 overrides */
+.rdp-root .rdp-months {
+  flex-wrap: nowrap;
+}
+
+.rdp-root .rdp-weekday {
+  font-size: 14px;
+}
+
+.rdp-root .rdp-caption_label {
+  font-size: 13px;
+}
+
+.rdp-root .rdp-chevron {
+  fill: var(--color-brand) !important;
+}
+
+.rdp-root {
+  --rdp-accent-color: var(--color-brand);
+  --rdp-accent-background-color: var(--color-brand-subtle);
+  --rdp-day-height: 32px;
+  --rdp-day-width: 32px;
+  --rdp-day_button-height: 30px;
+  --rdp-day_button-width: 30px;
+  --rdp-range_start-date-background-color: var(--color-available-strong);
+  --rdp-range_end-date-background-color: var(--color-available-strong);
+  --rdp-range_middle-background-color: var(--color-available-mid);
+  --rdp-range_middle-color: #555;
+  --rdp-range_start-color: #333;
+  --rdp-range_end-color: #333;
+  --rdp-selected-border: 1px solid var(--color-brand);
+  --rdp-day_button-border-radius: 0;
+  --rdp-disabled-opacity: 1;
+  font-family: var(--font-spartan, 'League Spartan'), sans-serif;
+  font-size: 12px;
+}
+
+.rdp-root .rdp-selected {
+  font-weight: normal;
+  font-size: inherit;
+}
+
+/* Free days: green background */
+.rdp-root .rdp-day:not(.rdp-disabled):not(.rdp-range_start):not(.rdp-range_end):not(.rdp-range_middle):not(.rdp-outside) .rdp-day_button {
+  background-color: var(--color-available);
+  color: #555;
+  border: 1px solid #bbb !important;
+}
+
+/* Remove border-radius */
+.rdp-root .rdp-day_button {
+  border-radius: 0 !important;
+}
+
+/* Disabled days */
+.rdp-root .rdp-disabled {
+  opacity: 1 !important;
+}
+
+.rdp-root .rdp-disabled .rdp-day_button {
+  color: #b4b3b3;
+  cursor: default;
+  pointer-events: none;
+  position: relative;
+}
+
+.rdp-root .rdp-disabled .rdp-day_button::before {
+  position: absolute;
+  content: 'X';
+  left: 4px;
+  top: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: rgb(233, 233, 233);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Partial availability - yellow */
+.rdp-root .rdp-day.availableFrom16:not(.rdp-range_start):not(.rdp-range_end) .rdp-day_button,
+.rdp-root .rdp-day.availableUntil12:not(.rdp-range_start):not(.rdp-range_end) .rdp-day_button {
+  background-color: var(--color-partial) !important;
+  color: #555;
+  overflow: visible;
+}
+
+/* Tooltip for partial days */
+.rdp-root .rdp-day.availableUntil12:not(.rdp-range_start):not(.rdp-range_end):hover {
+  position: relative;
+}
+
+.rdp-root .rdp-day.availableUntil12:not(.rdp-range_start):not(.rdp-range_end):hover::before {
+  content: 'Vapaa klo 12 asti';
+  position: absolute;
+  top: -14px;
+  left: -33px;
+  color: var(--color-partial-dark);
+  width: 105px;
+  font-size: 12px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #555;
+  line-height: 1.2;
+  padding: 3px 0;
+  z-index: 5;
+}
+
+.rdp-root .rdp-day.availableFrom16:not(.rdp-range_start):not(.rdp-range_end):hover::before {
+  content: 'Vapaa klo 16 alkaen';
+  position: absolute;
+  top: -14px;
+  left: -33px;
+  color: var(--color-partial-dark);
+  width: 105px;
+  font-size: 12px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #555;
+  line-height: 1.2;
+  padding: 3px 0;
+  z-index: 5;
+}
+
+/* Range start/end */
+.Selectable.rdp-root .rdp-range_start .rdp-day_button,
+.Selectable.rdp-root .rdp-range_end .rdp-day_button {
+  background-color: var(--color-available-strong);
+  color: #fff;
+  border: 2px solid var(--color-brand);
+  border-radius: 0;
+}
+
+/* Responsive calendar */
+@media only screen and (max-width: 700px) {
+  .hide-mobile {
+    display: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media only screen and (min-width: 701px) {
+  .hide-fullscreen {
+    display: none;
+  }
 }
