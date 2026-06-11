@@ -1,5 +1,5 @@
 import BookingApp from '@/components/BookingApp';
 
 export default function CalendarPage() {
-  return <BookingApp calendarOnly />;
+  return <BookingApp calendarOnly compact />;
 }

@@ -9,9 +9,10 @@ import type { CalendarState } from '@/lib/types';
 interface Props {
   calendarOnly?: boolean;
   customerType?: 'company' | 'private';
+  compact?: boolean;
 }
 
-export default function BookingApp({ calendarOnly, customerType }: Props) {
+export default function BookingApp({ calendarOnly, compact, customerType }: Props) {
   const [calendarData, setCalendarData] = useState<CalendarState>({});
   const [loading, setLoading] = useState(true);
 
@@ -45,6 +46,7 @@ export default function BookingApp({ calendarOnly, customerType }: Props) {
         availableFrom16={calendarData.villa?.from16}
         availableUntil12={calendarData.villa?.until12}
         calendarOnly
+        compact={compact}
         loading={loading}
       />
     );

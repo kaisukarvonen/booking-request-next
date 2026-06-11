@@ -123,7 +123,12 @@ export default function Form({
   };
 
   const setType = (type: 'company' | 'private') => {
-    setFormData((prev) => ({ ...prev, type }));
+    if (formData.type === type) return;
+    setFormData({ ...initialForm, type });
+    setShowPrivateForm(false);
+    setShowVillaParatiisiPrivateForm(false);
+    setActivePeriod(undefined);
+    setErrors({});
   };
 
   const isValid = () => {
