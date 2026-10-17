@@ -8,9 +8,10 @@ import type { Field, FormState, HandleOnChange } from '@/lib/types';
 interface Props {
   values: FormState;
   handleOnChange: HandleOnChange;
+  hiddenOptions?: string[];
 }
 
-export default function Extras({ values, handleOnChange }: Props) {
+export default function Extras({ values, handleOnChange, hiddenOptions }: Props) {
   const [openAccordions, setOpenAccordions] = useState<number[]>([
     0, 1, 2, 3, 4,
   ]);
@@ -32,6 +33,9 @@ export default function Extras({ values, handleOnChange }: Props) {
   };
 
   const activitiesField = getField('activities');
+  const extraServiceOptions = getField('extraServices')?.options.filter(
+    (o) => !hiddenOptions?.includes(o.key!)
+  );
 
   return (
     <div className="mt-4">
@@ -127,6 +131,7 @@ export default function Extras({ values, handleOnChange }: Props) {
 
       <CustomAccordion
         title="extraServices"
+        options={extraServiceOptions as { key: string; fi?: string }[]}
         index={3}
         isOpen={openAccordions.includes(3)}
         onToggle={toggleAccordion}

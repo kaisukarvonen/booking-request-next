@@ -6,7 +6,12 @@ import Extras from './Extras';
 import Notification from './Notification';
 import { getField, t } from '@/lib/fieldUtils';
 import { createEmailHTML, dateToStr } from '@/lib/createHTML';
-import type { CalendarState, DateRange, FormState, HandleOnChange } from '@/lib/types';
+import type {
+  CalendarState,
+  DateRange,
+  FormState,
+  HandleOnChange,
+} from '@/lib/types';
 
 const initialForm: FormState = {
   from: undefined,
@@ -39,11 +44,14 @@ interface Props {
 
 function validEmail(email: string) {
   return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
-    email
+    email,
   );
 }
 
-function cottageOptions(period: 'winter' | 'summer', fields: ReturnType<typeof getField>): boolean[] {
+function cottageOptions(
+  period: 'winter' | 'summer',
+  fields: ReturnType<typeof getField>,
+): boolean[] {
   const cottage = fields?.options.find((o) => o.key === 'cottage');
   const choices = cottage?.[period]?.choices ?? [];
   return new Array(choices.length).fill(false);
@@ -62,10 +70,16 @@ export default function Form({
   });
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const [showPrivateForm, setShowPrivateForm] = useState(false);
-  const [showVillaParatiisiPrivateForm, setShowVillaParatiisiPrivateForm] = useState(false);
-  const [activePeriod, setActivePeriod] = useState<'winter' | 'summer' | undefined>();
+  const [showVillaParatiisiPrivateForm, setShowVillaParatiisiPrivateForm] =
+    useState(false);
+  const [activePeriod, setActivePeriod] = useState<
+    'winter' | 'summer' | undefined
+  >();
   const [sendingEmail, setSendingEmail] = useState(false);
-  const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [notification, setNotification] = useState<{
+    type: 'success' | 'error';
+    message: string;
+  } | null>(null);
 
   const handleOnChange: HandleOnChange = (_e, data) => {
     setFormData((prev) => ({
@@ -102,7 +116,9 @@ export default function Form({
       departTime = '12';
     }
 
-    const period: 'winter' | 'summer' = [10, 11, 0, 1, 2, 3].includes(newFrom.getMonth())
+    const period: 'winter' | 'summer' = [10, 11, 0, 1, 2, 3].includes(
+      newFrom.getMonth(),
+    )
       ? 'winter'
       : 'summer';
 
@@ -134,14 +150,13 @@ export default function Form({
   const isValid = () => {
     const date = formData.to || formData.from;
     const mandatoryFilled =
-      date &&
-      formData.name &&
-      formData.email &&
-      formData.personAmount;
+      date && formData.name && formData.email && formData.personAmount;
     const emailOk = validEmail(formData.email);
     setErrors({
       mandatoryFields: mandatoryFilled ? undefined : 'Täytä pakolliset kentät!',
-      isValidEmail: emailOk ? undefined : 'Tarkista että sähköposti on oikeassa muodossa!',
+      isValidEmail: emailOk
+        ? undefined
+        : 'Tarkista että sähköposti on oikeassa muodossa!',
     });
     return !!mandatoryFilled && emailOk;
   };
@@ -167,16 +182,27 @@ export default function Form({
         }),
       });
       if (!res2.ok) throw new Error(await res2.text());
-      setNotification({ type: 'success', message: 'Tarjouspyyntösi on lähetetty onnistuneesti!' });
+      setNotification({
+        type: 'success',
+        message: 'Tarjouspyyntösi on lähetetty onnistuneesti!',
+      });
     } catch {
-      setNotification({ type: 'error', message: 'Virhe! Tarjouspyynnön lähetys epäonnistui.' });
+      setNotification({
+        type: 'error',
+        message: 'Virhe! Tarjouspyynnön lähetys epäonnistui.',
+      });
     } finally {
       setSendingEmail(false);
     }
   };
 
   const isCompany = formData.type === 'company';
-  const showPrivate = formData.type === 'private' && (showPrivateForm || showVillaParatiisiPrivateForm);
+  const isWainolaOnly =
+    (formData.type === 'private' && showPrivateForm) ||
+    (isCompany && !!formData.locationObj?.useWainolaCalendar);
+  const showPrivate =
+    formData.type === 'private' &&
+    (showPrivateForm || showVillaParatiisiPrivateForm);
 
   return (
     <div className="min-h-screen flex flex-col justify-between">
@@ -195,6 +221,31 @@ export default function Form({
               {c.text}
             </button>
           ))}
+          <a
+            href="https://app.dandelier.com/nuuksiontaika/marketplace?config_id=396c057b-e022-4ac8-b9bc-5e2eacca64bb"
+            target="_blank"
+            rel="noreferrer"
+            className="btn btn-lg inline-flex items-center gap-1.5 no-underline"
+          >
+            Hääasiakas
+            <svg
+              aria-hidden="true"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="inline ml-2 mb-1"
+            >
+              <path d="M14 4h6v6" />
+              <path d="M20 4 10 14" />
+              <path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" />
+            </svg>
+            <span className="sr-only">(avautuu uuteen välilehteen)</span>
+          </a>
         </div>
 
         {formData.type && (
@@ -211,15 +262,19 @@ export default function Form({
               setShowPrivateForm={setShowPrivateForm}
               showPrivateForm={formData.type === 'private' && showPrivateForm}
               showVillaParatiisiPrivateForm={showVillaParatiisiPrivateForm}
-              setShowVillaParatiisiPrivateForm={setShowVillaParatiisiPrivateForm}
+              setShowVillaParatiisiPrivateForm={
+                setShowVillaParatiisiPrivateForm
+              }
               calendarLoading={calendarLoading}
             />
 
             {Object.values(errors).some(Boolean) && (
               <div className="mt-3 p-2 bg-red-50 border border-red-300 text-red-700 text-sm">
-                {Object.values(errors).filter(Boolean).map((msg, i) => (
-                  <p key={i}>{msg}</p>
-                ))}
+                {Object.values(errors)
+                  .filter(Boolean)
+                  .map((msg, i) => (
+                    <p key={i}>{msg}</p>
+                  ))}
               </div>
             )}
 
@@ -228,10 +283,15 @@ export default function Form({
                 <Extras
                   values={formData}
                   handleOnChange={handleOnChange}
+                  hiddenOptions={isWainolaOnly ? ['palju'] : []}
                 />
 
                 <div className="mt-4 p-2 bg-gray-50 border border-gray-200 text-sm">
-                  {getField('paymentInfo')?.[formData.type as 'company' | 'private']?.fi}
+                  {
+                    getField('paymentInfo')?.[
+                      formData.type as 'company' | 'private'
+                    ]?.fi
+                  }
                   <div className="mt-1">
                     Tutustu{' '}
                     <a
@@ -259,7 +319,10 @@ export default function Form({
                     }
                     className="accent-brand"
                   />
-                  <label htmlFor="newsLetter" className="text-sm cursor-pointer">
+                  <label
+                    htmlFor="newsLetter"
+                    className="text-sm cursor-pointer"
+                  >
                     Tilaan uutiskirjeen
                   </label>
                 </div>

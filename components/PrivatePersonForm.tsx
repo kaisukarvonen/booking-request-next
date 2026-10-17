@@ -17,7 +17,6 @@ export default function PrivatePersonForm({
   const visitTypes = [
     { key: 'birthday', label: t('birthday') },
     { key: 'bachelor', label: t('bachelor') },
-    { key: 'party', label: t('party') },
   ];
 
   return (

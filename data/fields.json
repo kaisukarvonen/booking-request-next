@@ -70,11 +70,6 @@
     "options": []
   },
   {
-    "key": "party",
-    "fi": "Häät",
-    "options": []
-  },
-  {
     "key": "extraServices",
     "fi": "Lisäpalvelut",
     "options": [
